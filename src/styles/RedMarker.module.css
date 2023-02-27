@@ -1,0 +1,81 @@
+.IconMarkerWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 200px;
+}
+
+.IconMarkerBalloon {
+  position: relative;
+  z-index: 100;
+  cursor: pointer;
+  background-color: rgba(234, 67, 53, 0.6);
+  backdrop-filter: blur(4px);
+  color: black;
+  font-size: 1.2em;
+  padding: 6px 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.IconMarkerBalloon:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  border: 10px solid transparent;
+  border-top: 10px solid rgba(234, 67, 53, 0.6);
+}
+
+.IconMarkerBalloonTitle {
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+.IconMarkerBalloonTitleMoreZoom {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.IconMarkerBalloonContent {
+  padding-top: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.IconMarkerBalloonDesc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.IconMarkerBalloonPhoto {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+}
+
+.IconMarkerBalloonPhoto img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.IconMarKerIcon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  padding-top: 8px;
+}
+
+.IconMarKerIcon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
