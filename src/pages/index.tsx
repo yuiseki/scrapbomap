@@ -16,6 +16,40 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1>scrapbomap</h1>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            margin: "20px 0",
+          }}
+        >
+          <p style={{ margin: "0px" }}>
+            このWebサービスは
+            <a
+              target="_blank"
+              href="https://ja.wikipedia.org/wiki/%E5%A2%97%E4%BA%95%E4%BF%8A%E4%B9%8B"
+            >
+              増井俊之さん
+            </a>
+            が発明した
+            <a target="_blank" href="https://gyamap.com/">
+              Gyamap
+            </a>
+            をNext.jsで写経したものです（
+            <a target="_blank" href="https://github.com/yuiseki/scrapbomap">
+              GitHubで絶賛開発中
+            </a>
+            ）
+          </p>
+          <p style={{ margin: "0px", paddingLeft: "20px" }}>
+            <a
+              target="_blank"
+              href="https://scrapbox.io/Gyamap/%E6%A6%82%E8%A6%81"
+            >
+              Gyamapとは
+            </a>
+          </p>
+        </div>
         <h2>オススメの地図</h2>
         <ul className={styles.list}>
           <li>
