@@ -22,7 +22,7 @@ export const Photo: React.FC<{ poi: GyamapResponse }> = ({ poi }) => {
     <div
       style={{
         margin: "0 5px 5px",
-        cursor: "pointer",
+        cursor: "zoom-in",
       }}
       onClick={flyTo}
       title={`${poi.title}\r\n${poi.desc}`}

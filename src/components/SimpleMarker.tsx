@@ -23,7 +23,7 @@ export const SimpleMarker: React.FC<SimpleMarkerProps> = ({
         onClick && onClick(e);
       }}
       anchor="bottom"
-      style={zIndex ? { zIndex: zIndex } : {}}
+      style={{ zIndex: zIndex ? zIndex : 100, cursor: "zoom-in" }}
     >
       {children}
     </Marker>

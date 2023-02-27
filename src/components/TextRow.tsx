@@ -35,7 +35,7 @@ export const Title: React.FC<{ projectName: string; poi: GyamapResponse }> = ({
         />
       </a>
       <span> </span>
-      <span onClick={flyTo} style={{ fontWeight: "bold", cursor: "pointer" }}>
+      <span onClick={flyTo} style={{ fontWeight: "bold", cursor: "zoom-in" }}>
         {poi.title}
       </span>
       {poi.desc && poi.desc.length > 0 && (

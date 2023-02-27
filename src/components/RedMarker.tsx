@@ -43,7 +43,7 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
   return (
     <SimpleMarker latitude={latitude} longitude={longitude} onClick={flyTo}>
       <div
-        className={styles.IconMarkerWrap}
+        className={styles.RedMarkerWrap}
         title={`${title}\r\n${desc}`}
         style={{
           opacity: (() => {
@@ -67,9 +67,9 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
           })(),
         }}
       >
-        <div className={styles.IconMarkerBalloon}>
+        <div className={styles.RedMarkerBalloon}>
           <div
-            className={`${styles.IconMarkerBalloonTitle} ${styles.IconMarkerBalloonTitleMoreZoom}`}
+            className={`${styles.RedMarkerBalloonTitle} ${styles.RedMarkerBalloonTitleMoreZoom}`}
           >
             ・
           </div>
