@@ -53,6 +53,18 @@ export default function Home() {
         <h2>オススメの地図</h2>
         <ul className={styles.list}>
           <li>
+            <Link href="/kyoto-sightseeing-map">kyoto-sightseeing-map</Link>
+          </li>
+          <li>
+            <Link href="/nara-tour-map">nara-tour-map</Link>
+          </li>
+          <li>
+            <Link href="/kanagawa-ramen-map">kanagawa-ramen-map</Link>
+          </li>
+          <li>
+            <Link href="/jihanki-map">jihanki-map</Link>
+          </li>
+          <li>
             <Link href="/masuimap">masuimap</Link>
           </li>
           <li>
@@ -60,9 +72,6 @@ export default function Home() {
           </li>
           <li>
             <Link href="/inoue2002">inoue2002</Link>
-          </li>
-          <li>
-            <Link href="/kyoto-sightseeing-map">kyoto-sightseeing-map</Link>
           </li>
         </ul>
       </main>
