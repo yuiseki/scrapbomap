@@ -192,6 +192,8 @@ const Post = () => {
                   display: "flex",
                   flexWrap: "wrap",
                   marginLeft: "5px",
+                  maxHeight: "400px",
+                  overflowY: "hidden",
                 }}
               >
                 {sortedData &&
