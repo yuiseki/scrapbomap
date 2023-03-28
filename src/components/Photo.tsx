@@ -12,9 +12,14 @@ export const Photo: React.FC<{ poi: turf.helpers.Feature }> = ({ poi }) => {
       if (!map) return;
       if (poi.geometry.type !== "Point") return;
 
+      let zoomTo = map.getZoom();
+      if (zoomTo < 15) {
+        zoomTo = 15;
+      }
+
       map.flyTo({
         center: poi.geometry.coordinates as LngLatLike,
-        zoom: map.getZoom(),
+        zoom: zoomTo,
       });
     },
     [map, poi]
