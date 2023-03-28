@@ -38,7 +38,7 @@ const Post = () => {
     fetcher
   );
   const [sortedData, setSortedData] = useState<
-    turf.helpers.FeatureCollection | undefined
+    turf.helpers.Feature[] | undefined
   >(undefined);
 
   // 初回のみ地図をデータにあわせる
@@ -88,8 +88,7 @@ const Post = () => {
       const centerToTo = turf.distance(center, to, { units: "degrees" });
       return centerToFrom - centerToTo;
     });
-    geojsondata.features = sorted;
-    setSortedData(geojsondata);
+    setSortedData(sorted);
   }, [currentCenter, geojsondata]);
 
   return (
@@ -185,7 +184,7 @@ const Post = () => {
                   }
                   return (
                     <RedMarker
-                      key={poi.properties.title}
+                      key={poi.properties.url}
                       icon={"yuiseki_icon.png"}
                       title={poi.properties.title}
                       longitude={poi.geometry.coordinates[0] as number}
@@ -211,11 +210,11 @@ const Post = () => {
                 }}
               >
                 {sortedData &&
-                  sortedData.features.slice(0, 14).map((poi, idx) => {
+                  sortedData.slice(0, 14).map((poi, idx) => {
                     if (!poi.properties) {
                       return null;
                     }
-                    return <Photo key={poi.properties.title} poi={poi} />;
+                    return <Photo key={poi.properties.url} poi={poi} />;
                   })}
               </div>
             </div>
@@ -223,13 +222,13 @@ const Post = () => {
           <div>
             <ul style={{ listStyle: "none", padding: 0, margin: "20px" }}>
               {sortedData &&
-                sortedData.features.map((poi) => {
+                sortedData.map((poi) => {
                   if (!poi.properties) {
                     return null;
                   }
                   return (
                     <Title
-                      key={poi.properties.title}
+                      key={poi.properties.url}
                       projectName={id as string}
                       poi={poi}
                     />
