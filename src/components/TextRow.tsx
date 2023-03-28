@@ -1,31 +1,37 @@
 /* eslint-disable @next/next/no-img-element */
 import { GyamapResponse } from "@/types/GyamapResponse";
 import { useCallback } from "react";
-import { useMap } from "react-map-gl";
+import { LngLatLike, useMap } from "react-map-gl";
+import * as turf from "@turf/turf";
 
-export const Title: React.FC<{ projectName: string; poi: GyamapResponse }> = ({
-  projectName,
-  poi,
-}) => {
+export const Title: React.FC<{
+  projectName: string;
+  poi: turf.helpers.Feature;
+}> = ({ projectName, poi }) => {
   const { mainMap: map } = useMap();
 
   const flyTo = useCallback(
     (e: any) => {
       if (!map) return;
+      if (poi.geometry.type !== "Point") return;
 
       map.flyTo({
-        center: [poi.longitude, poi.latitude],
+        center: poi.geometry.coordinates as LngLatLike,
         zoom: map.getZoom(),
       });
     },
     [map, poi]
   );
 
+  if (!poi.properties) {
+    return null;
+  }
+
   return (
     <li style={{ marginTop: "5px" }}>
       <a
         target="_blank"
-        href={`https://scrapbox.io/${projectName}/${poi.title}`}
+        href={`https://scrapbox.io/${projectName}/${poi.properties.title}`}
       >
         <img
           alt="Go to Scrapbox"
@@ -36,12 +42,12 @@ export const Title: React.FC<{ projectName: string; poi: GyamapResponse }> = ({
       </a>
       <span> </span>
       <span onClick={flyTo} style={{ fontWeight: "bold", cursor: "zoom-in" }}>
-        {poi.title}
+        {poi.properties.title}
       </span>
-      {poi.desc && poi.desc.length > 0 && (
+      {poi.properties.descriptions && poi.properties.descriptions.length > 0 && (
         <>
           <span>: </span>
-          <span>{poi.desc}</span>
+          <span>{poi.properties.descriptions.join("")}</span>
         </>
       )}
     </li>

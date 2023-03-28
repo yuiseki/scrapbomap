@@ -1,22 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
 import { GyamapResponse } from "@/types/GyamapResponse";
 import { useCallback } from "react";
-import { useMap } from "react-map-gl";
+import { LngLatLike, useMap } from "react-map-gl";
+import * as turf from "@turf/turf";
 
-export const Photo: React.FC<{ poi: GyamapResponse }> = ({ poi }) => {
+export const Photo: React.FC<{ poi: turf.helpers.Feature }> = ({ poi }) => {
   const { mainMap: map } = useMap();
 
   const flyTo = useCallback(
     (e: any) => {
       if (!map) return;
+      if (poi.geometry.type !== "Point") return;
 
       map.flyTo({
-        center: [poi.longitude, poi.latitude],
+        center: poi.geometry.coordinates as LngLatLike,
         zoom: map.getZoom(),
       });
     },
     [map, poi]
   );
+
+  if (!poi.properties) {
+    return null;
+  }
 
   return (
     <div
@@ -25,17 +31,33 @@ export const Photo: React.FC<{ poi: GyamapResponse }> = ({ poi }) => {
         cursor: "zoom-in",
       }}
       onClick={flyTo}
-      title={`${poi.title}\r\n${poi.desc}`}
+      title={`${poi.properties.title}\r\n${poi.properties.descriptions[0]}`}
     >
-      <img
-        alt={poi.title}
-        style={{
-          height: "195px",
-          width: "195px",
-          objectFit: "cover",
-        }}
-        src={poi.photo + "/raw"}
-      />
+      {poi.properties.image ? (
+        <img
+          alt={poi.properties.title}
+          style={{
+            height: "195px",
+            width: "195px",
+            objectFit: "cover",
+          }}
+          src={poi.properties.image}
+        />
+      ) : (
+        <span
+          title={poi.properties.title}
+          style={{
+            display: "inline-block",
+            height: "195px",
+            width: "195px",
+            lineHeight: "195px",
+            textAlign: "center",
+            verticalAlign: "middle",
+          }}
+        >
+          no image
+        </span>
+      )}
     </div>
   );
 };
