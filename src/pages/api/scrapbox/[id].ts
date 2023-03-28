@@ -86,9 +86,11 @@ export default async function handler(
         point.properties = {
           title: page.title,
           image: image,
-          descriptions: page.descriptions.filter((desc) => {
-            return !desc.startsWith("[");
-          }),
+          descriptions: page.descriptions
+            .filter((desc) => {
+              return !desc.startsWith("[");
+            })
+            .join("\n"),
         };
         return point;
       } catch (error) {

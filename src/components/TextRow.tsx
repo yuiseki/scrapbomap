@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { GyamapResponse } from "@/types/GyamapResponse";
 import { useCallback } from "react";
 import { LngLatLike, useMap } from "react-map-gl";
 import * as turf from "@turf/turf";
@@ -47,7 +46,7 @@ export const Title: React.FC<{
       {poi.properties.descriptions && poi.properties.descriptions.length > 0 && (
         <>
           <span>: </span>
-          <span>{poi.properties.descriptions.join("")}</span>
+          <span>{poi.properties.descriptions}</span>
         </>
       )}
     </li>
