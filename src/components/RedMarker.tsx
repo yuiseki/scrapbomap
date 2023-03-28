@@ -33,11 +33,9 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
     (e: MapboxEvent<MouseEvent>) => {
       if (!map) return;
 
-      if (currentZoom < 17) {
-        map.flyTo({ center: [longitude, latitude], zoom: 17 });
-      }
+      map.flyTo({ center: [longitude, latitude], zoom: 15 });
     },
-    [map, currentZoom, longitude, latitude]
+    [map, longitude, latitude]
   );
 
   return (
