@@ -20,6 +20,9 @@ type GyazoImageWithLocation = {
     app?: string;
     title?: string;
   };
+  grid_thumbs: {
+    large_url_webp_2x: string;
+  };
   desc: string;
   links: string[];
   url: string;
@@ -63,7 +66,7 @@ export default async function handler(
       }
       point.properties = {
         title: title,
-        image: image.url,
+        image: image.grid_thumbs.large_url_webp_2x,
         descriptions: image.desc,
         links: image.links,
         url: image.permalink_url,
