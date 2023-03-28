@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import * as turf from "@turf/turf";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { GyamapResponse } from "@/types/GyamapResponse";
 import { fetcher } from "@/lib/fetcher";
 import { Photo } from "@/components/Photo";
 import { Title } from "@/components/TextRow";

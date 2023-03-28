@@ -29,8 +29,14 @@ const Post = () => {
     undefined
   );
 
-  const apiUrl = id ? `/api/geojson/gyazo/${id}` : undefined;
-  const { data } = useSWR<turf.helpers.FeatureCollection>(apiUrl, fetcher);
+  const detailApiUrl = id ? `/api/detail/gyazo/${id}` : undefined;
+  const { data: detaildata } = useSWR(detailApiUrl, fetcher);
+
+  const geoJsonApiUrl = id ? `/api/geojson/gyazo/${id}` : undefined;
+  const { data: geojsondata } = useSWR<turf.helpers.FeatureCollection>(
+    geoJsonApiUrl,
+    fetcher
+  );
   const [sortedData, setSortedData] = useState<
     turf.helpers.FeatureCollection | undefined
   >(undefined);
@@ -38,9 +44,9 @@ const Post = () => {
   // 初回のみ地図をデータにあわせる
   useEffect(() => {
     if (!mapRef || !mapRef.current) return;
-    if (!data) return;
+    if (!geojsondata) return;
 
-    const [minLng, minLat, maxLng, maxLat] = turf.bbox(data);
+    const [minLng, minLat, maxLng, maxLat] = turf.bbox(geojsondata);
 
     mapRef.current.fitBounds(
       [
@@ -49,7 +55,7 @@ const Post = () => {
       ],
       { padding: 40, duration: 1000 }
     );
-  }, [data]);
+  }, [geojsondata]);
 
   const onLoad = useCallback(() => {
     if (!mapRef || !mapRef.current) return;
@@ -69,8 +75,8 @@ const Post = () => {
 
   useEffect(() => {
     if (!currentCenter) return;
-    if (!data) return;
-    const sorted = data.features.sort((poi1, poi2) => {
+    if (!geojsondata) return;
+    const sorted = geojsondata.features.sort((poi1, poi2) => {
       if (poi1.geometry.type !== "Point" || poi2.geometry.type !== "Point") {
         return 0;
       }
@@ -82,15 +88,18 @@ const Post = () => {
       const centerToTo = turf.distance(center, to, { units: "degrees" });
       return centerToFrom - centerToTo;
     });
-    data.features = sorted;
-    setSortedData(data);
-  }, [currentCenter, data]);
+    geojsondata.features = sorted;
+    setSortedData(geojsondata);
+  }, [currentCenter, geojsondata]);
 
   return (
     <>
       <Head>
-        <title>{id}の地図 - scrapbomap</title>
-        <meta name="description" content={`${id}の地図 - scrapbomap`} />
+        <title>{detaildata ? detaildata.name : id}の地図 - scrapbomap</title>
+        <meta
+          name="description"
+          content={`${detaildata ? detaildata.name : id}の地図 - scrapbomap`}
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -107,8 +116,8 @@ const Post = () => {
               <b>scrapbomap</b>
             </a>
             <span> / </span>
-            <a target="_blank" href={`https://scrapbox.io/${id}`}>
-              {id}
+            <a target="_blank" href={`${detaildata ? detaildata.url : ""}`}>
+              {detaildata ? detaildata.name : id}
             </a>
             の地図
           </h3>
@@ -166,8 +175,8 @@ const Post = () => {
               onLoad={onLoad}
               onMove={onMove}
             >
-              {data &&
-                data.features.map((poi) => {
+              {geojsondata &&
+                geojsondata.features.map((poi) => {
                   if (!poi.properties) {
                     return null;
                   }

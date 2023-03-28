@@ -23,6 +23,7 @@ type GyazoImageWithLocation = {
   desc: string;
   links: string[];
   url: string;
+  permalink_url: string;
 };
 
 export default async function handler(
@@ -65,6 +66,7 @@ export default async function handler(
         image: image.url,
         descriptions: image.desc,
         links: image.links,
+        url: image.permalink_url,
       };
       return point;
     });

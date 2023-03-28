@@ -86,6 +86,7 @@ export default async function handler(
         point.properties = {
           title: page.title,
           image: image,
+          url: `https://scrapbox.io/${id}/${page.title}`,
           descriptions: page.descriptions
             .filter((desc) => {
               return !desc.startsWith("[");

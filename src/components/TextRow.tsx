@@ -28,16 +28,22 @@ export const Title: React.FC<{
 
   return (
     <li style={{ marginTop: "5px" }}>
-      <a
-        target="_blank"
-        href={`https://scrapbox.io/${projectName}/${poi.properties.title}`}
-      >
-        <img
-          alt="Go to Scrapbox"
-          width={18}
-          height={18}
-          src="https://scrapbox.io/assets/img/favicon/favicon.ico"
-        />
+      <a target="_blank" href={poi.properties.url}>
+        {poi.properties.url.startsWith("https://scrapbox.io") ? (
+          <img
+            alt="Go to Scrapbox"
+            width={18}
+            height={18}
+            src="https://scrapbox.io/assets/img/favicon/favicon.ico"
+          />
+        ) : (
+          <img
+            alt="Go to Gyazo"
+            width={18}
+            height={18}
+            src="https://gyazo.com/favicon.ico"
+          />
+        )}
       </a>
       <span> </span>
       <span onClick={flyTo} style={{ fontWeight: "bold", cursor: "zoom-in" }}>
