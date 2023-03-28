@@ -101,6 +101,20 @@ const Post = () => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        {sortedData &&
+          sortedData.map((poi) => {
+            if (!poi.properties) {
+              return null;
+            }
+            return (
+              <link
+                key={poi.properties.image}
+                rel="preload"
+                href={poi.properties.image}
+                as="image"
+              />
+            );
+          })}
       </Head>
       <div>
         <div
