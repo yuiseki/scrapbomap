@@ -29,7 +29,7 @@ const Post = () => {
     undefined
   );
 
-  const apiUrl = id ? `/api/scrapbox/${id}` : undefined;
+  const apiUrl = id ? `/api/geojson/scrapbox/${id}` : undefined;
   const { data } = useSWR<turf.helpers.FeatureCollection>(apiUrl, fetcher);
   const [sortedData, setSortedData] = useState<
     turf.helpers.FeatureCollection | undefined

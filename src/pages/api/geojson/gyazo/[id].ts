@@ -30,11 +30,12 @@ export default async function handler(
   res: NextApiResponse<turf.helpers.FeatureCollection>
 ) {
   const { id } = req.query;
-  const apiRes = await fetch(
+
+  const imagesRes = await fetch(
     `https://gyazo.com/api/internal/boards/${id}/images?per=100`
   );
-  const apiJson = await apiRes.json();
-  const poiList = apiJson
+  const imagesJson = await imagesRes.json();
+  const poiList = imagesJson
     .filter((image: GyazoImage) => {
       return (
         image.metadata &&
