@@ -42,6 +42,7 @@ export const Photo: React.FC<{ poi: turf.helpers.Feature }> = ({ poi }) => {
             objectFit: "cover",
           }}
           src={poi.properties.image}
+          loading="lazy"
         />
       ) : (
         <span
