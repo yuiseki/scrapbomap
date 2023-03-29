@@ -40,6 +40,13 @@ const Post = () => {
     if (!data) return;
 
     const [minLng, minLat, maxLng, maxLat] = turf.bbox(data);
+    if (
+      minLng === Infinity ||
+      minLat === Infinity ||
+      maxLng === Infinity ||
+      maxLat === Infinity
+    )
+      return;
 
     mapRef.current.fitBounds(
       [
@@ -167,7 +174,7 @@ const Post = () => {
             >
               {data &&
                 data.features.map((poi) => {
-                  if (!poi.properties) {
+                  if (!poi || !poi.properties) {
                     return null;
                   }
                   if (poi.geometry.type !== "Point") {

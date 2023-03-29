@@ -49,8 +49,8 @@ export default async function handler(
       );
     }
   );
-  const scrapboxGeoJsonPoints = scrapboxLocationPages.map(
-    (page: ScrapboxPageSummary) => {
+  const scrapboxGeoJsonPoints = scrapboxLocationPages
+    .map((page: ScrapboxPageSummary) => {
       // Note order: longitude, latitude.
       // N=latitude
       // E=longitude
@@ -96,9 +96,12 @@ export default async function handler(
         return point;
       } catch (error) {
         console.error(error);
+        return null;
       }
-    }
-  );
+    })
+    .filter((i: any) => {
+      return i !== null;
+    });
   const scrapboxGeoJson = turf.featureCollection(scrapboxGeoJsonPoints);
   res.status(200).json(scrapboxGeoJson);
 }
