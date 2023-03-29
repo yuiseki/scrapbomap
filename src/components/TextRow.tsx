@@ -32,12 +32,6 @@ export const Title: React.FC<{
   }
 
   const size = 30;
-  const datetime = new Date(poi.properties.captured_at);
-  const monthString = datetime.getMonth().toString().padStart(2, "0");
-  const dayString = datetime.getDay().toString().padStart(2, "0");
-  const hourString = datetime.getHours().toString().padStart(2, "0");
-  const minuteString = datetime.getMinutes().toString().padStart(2, "0");
-  const datetimeString = `${datetime.getFullYear()}-${monthString}-${dayString} ${hourString}:${minuteString}`;
 
   return (
     <li
@@ -96,7 +90,7 @@ export const Title: React.FC<{
       {poi.properties.captured_at && (
         <>
           <span> </span>
-          <span>{datetimeString}</span>
+          <span>{poi.properties.captured_at_str}</span>
         </>
       )}
       <>

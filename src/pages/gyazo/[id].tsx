@@ -68,10 +68,14 @@ const Post = () => {
           if (!poi1.properties || !poi2.properties) {
             return 0;
           }
-          return -(
-            new Date(poi1.properties.captured_at).getTime() -
-            new Date(poi2.properties.captured_at).getTime()
+          const poi1Date = Math.floor(
+            new Date(poi2.properties.captured_at).getTime() / 1000
           );
+          const poi2Date = Math.floor(
+            new Date(poi1.properties.captured_at).getTime() / 1000
+          );
+          console.log(poi1Date, poi2Date);
+          return poi2Date - poi1Date;
         });
         setSortedData(sorted);
         break;

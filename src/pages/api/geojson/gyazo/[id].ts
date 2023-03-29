@@ -74,6 +74,13 @@ export default async function handler(
           .slice(1, (image.desc.match(/\n/g) || []).length + 1)
           .join(" ");
       }
+      let captured_at_str;
+      const datetime = new Date(image.exif_captured_at);
+      const monthString = (datetime.getMonth() + 1).toString().padStart(2, "0");
+      const dayString = datetime.getDate().toString().padStart(2, "0");
+      const hourString = datetime.getHours().toString().padStart(2, "0");
+      const minuteString = datetime.getMinutes().toString().padStart(2, "0");
+      captured_at_str = `${datetime.getFullYear()}-${monthString}-${dayString} ${hourString}:${minuteString}`;
       point.properties = {
         title: title,
         image: image.grid_thumbs.large_url_webp_2x,
@@ -82,6 +89,7 @@ export default async function handler(
         url: image.permalink_url,
         created_at: image.created_at,
         captured_at: image.exif_captured_at,
+        captured_at_str: captured_at_str,
       };
       return point;
     });
