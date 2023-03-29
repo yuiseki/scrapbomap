@@ -53,6 +53,21 @@ export default function Home() {
         <h2>オススメの地図</h2>
         <ul className={styles.list}>
           <li>
+            <Link href="/gyazo/86c21448cb5b45f6ba58ca778e67288a">
+              yuisekiの京都マップ
+            </Link>
+          </li>
+          <li>
+            <Link href="/gyazo/f550e905a4f8988430750e6a621b00ea">
+              yuisekiのアキバマップ
+            </Link>
+          </li>
+          <li>
+            <Link href="/gyazo/5939495c0dd36429de93875b915e729a">
+              沖縄県那覇市 2023-03 yuiseki
+            </Link>
+          </li>
+          <li>
             <Link href="/scrapbox/kyoto-sightseeing-map">
               kyoto-sightseeing-map
             </Link>
