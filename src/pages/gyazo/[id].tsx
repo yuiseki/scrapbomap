@@ -40,12 +40,14 @@ const Post = () => {
   const [sortedData, setSortedData] = useState<
     turf.helpers.Feature[] | undefined
   >(undefined);
-  const [sortOrder, setSortOrder] = useState("location");
+  const [sortOrder, setSortOrder] = useState<string | undefined>(undefined);
 
   // ソートの実装
   useEffect(() => {
     if (!currentCenter) return;
     if (!geojsondata) return;
+    console.log(sortOrder);
+
     switch (sortOrder) {
       case "title": {
         const sorted = geojsondata.features.sort((poi1, poi2) => {
@@ -100,6 +102,11 @@ const Post = () => {
         break;
     }
   }, [currentCenter, geojsondata, sortOrder]);
+
+  // 初期値は近さ
+  useEffect(() => {
+    setSortOrder("location");
+  }, []);
 
   // 初回のみ地図をデータにあわせる
   useEffect(() => {
@@ -274,6 +281,44 @@ const Post = () => {
                     return <Photo key={poi.properties.url} poi={poi} />;
                   })}
               </div>
+            </div>
+          </div>
+          <div style={{ margin: "20px", display: "flex", gap: "10px" }}>
+            <div>
+              <input
+                type="radio"
+                id="sort-location"
+                checked={sortOrder === "location"}
+                onChange={() => {
+                  setSortOrder("location");
+                }}
+                style={{ marginRight: "10px" }}
+              />
+              <label htmlFor="sort-location">🗺 近さ</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="sort-datetime"
+                checked={sortOrder === "datetime"}
+                onChange={() => {
+                  setSortOrder("datetime");
+                }}
+                style={{ marginRight: "10px" }}
+              />
+              <label htmlFor="sort-datetime">↔ 撮影日時</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="sort-title"
+                checked={sortOrder === "title"}
+                onChange={() => {
+                  setSortOrder("title");
+                }}
+                style={{ marginRight: "10px" }}
+              />
+              <label htmlFor="sort-title">↕ タイトル</label>
             </div>
           </div>
           <div>
