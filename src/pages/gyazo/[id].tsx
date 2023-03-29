@@ -117,6 +117,13 @@ const Post = () => {
     if (!geojsondata) return;
 
     const [minLng, minLat, maxLng, maxLat] = turf.bbox(geojsondata);
+    if (
+      minLng === Infinity ||
+      minLat === Infinity ||
+      maxLng === Infinity ||
+      maxLat === Infinity
+    )
+      return;
 
     mapRef.current.fitBounds(
       [
