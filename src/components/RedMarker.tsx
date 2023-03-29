@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { SimpleMarker } from "./SimpleMarker";
 import styles from "@/styles/RedMarker.module.css";
 import { MapboxEvent, useMap } from "react-map-gl";
@@ -17,6 +18,7 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
   longitude,
   title,
   desc,
+  photo,
 }) => {
   const { current: map } = useMap();
   const [currentZoom, setCurrentZoom] = useState(7);
@@ -37,6 +39,8 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
     },
     [map, longitude, latitude]
   );
+
+  const size = 30;
 
   return (
     <SimpleMarker latitude={latitude} longitude={longitude} onClick={flyTo}>
@@ -69,7 +73,32 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
           <div
             className={`${styles.RedMarkerBalloonTitle} ${styles.RedMarkerBalloonTitleMoreZoom}`}
           >
-            ・
+            {currentZoom > 13 && photo && photo.length > 0 ? (
+              <img
+                alt={title}
+                style={{
+                  height: `${size}px`,
+                  width: `${size}px`,
+                  objectFit: "cover",
+                  cursor: "zoom-in",
+                }}
+                src={photo}
+                loading="lazy"
+              />
+            ) : (
+              <span
+                style={{
+                  display: "inline-block",
+                  height: `${size}px`,
+                  width: `${size}px`,
+                  lineHeight: `${size}px`,
+                  textAlign: "center",
+                  verticalAlign: "middle",
+                }}
+              >
+                ・
+              </span>
+            )}
           </div>
         </div>
       </div>

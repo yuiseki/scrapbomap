@@ -178,6 +178,7 @@ const Post = () => {
                       key={poi.properties.title}
                       icon={"yuiseki_icon.png"}
                       title={poi.properties.title}
+                      photo={poi.properties.image}
                       longitude={poi.geometry.coordinates[0] as number}
                       latitude={poi.geometry.coordinates[1] as number}
                     />
