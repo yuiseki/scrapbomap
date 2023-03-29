@@ -64,10 +64,17 @@ export default async function handler(
           }
         }
       }
+      let desc = image.desc;
+      if (title === image.desc.split("\n")[0]) {
+        desc = image.desc
+          .split("\n")
+          .slice(1, (image.desc.match(/\n/g) || []).length + 1)
+          .join(" ");
+      }
       point.properties = {
         title: title,
         image: image.grid_thumbs.large_url_webp_2x,
-        descriptions: image.desc,
+        descriptions: desc,
         links: image.links,
         url: image.permalink_url,
       };
