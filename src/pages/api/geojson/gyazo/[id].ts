@@ -61,6 +61,11 @@ export default async function handler(
       } else {
         if (image.desc.length > 0) {
           title = image.desc.split("\n")[0];
+          if (title.startsWith("http")) {
+            if (image.desc.length > 1) {
+              title = image.desc.split("\n")[1];
+            }
+          }
         } else {
           if (image.metadata.app) {
             title = image.metadata.app;
