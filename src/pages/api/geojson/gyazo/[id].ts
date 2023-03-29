@@ -12,6 +12,9 @@ type GyazoImage = {
 };
 
 type GyazoImageWithLocation = {
+  created_at: string;
+  updated_at: string;
+  exif_captured_at: string;
   metadata: {
     exif_normalized: {
       longitude: number;
@@ -77,6 +80,8 @@ export default async function handler(
         descriptions: desc,
         links: image.links,
         url: image.permalink_url,
+        created_at: image.created_at,
+        captured_at: image.exif_captured_at,
       };
       return point;
     });
