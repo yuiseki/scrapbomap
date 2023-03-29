@@ -68,7 +68,7 @@ const Post = () => {
           if (!poi1.properties || !poi2.properties) {
             return 0;
           }
-          return (
+          return -(
             new Date(poi1.properties.captured_at).getTime() -
             new Date(poi2.properties.captured_at).getTime()
           );
@@ -97,7 +97,6 @@ const Post = () => {
         setSortedData(sorted);
         break;
       }
-
       default:
         break;
     }
