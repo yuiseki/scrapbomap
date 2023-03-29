@@ -22,6 +22,7 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
 }) => {
   const { current: map } = useMap();
   const [currentZoom, setCurrentZoom] = useState(7);
+  const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
     if (!map) return;
@@ -30,6 +31,28 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
       setCurrentZoom(e.viewState.zoom);
     });
   }, [map]);
+
+  useEffect(() => {
+    let newOpacity = 1;
+    if (!currentZoom) {
+      newOpacity = 1;
+    } else {
+      if (currentZoom < 8) {
+        newOpacity = 0.7;
+      } else if (currentZoom < 9) {
+        newOpacity = 0.75;
+      } else if (currentZoom < 12) {
+        newOpacity = 0.8;
+      } else if (currentZoom < 13) {
+        newOpacity = 0.85;
+      } else if (currentZoom < 14) {
+        newOpacity = 0.9;
+      } else {
+        newOpacity = 1;
+      }
+    }
+    setOpacity(newOpacity);
+  }, [currentZoom]);
 
   const flyTo = useCallback(
     (e: MapboxEvent<MouseEvent>) => {
@@ -48,32 +71,14 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
         className={styles.RedMarkerWrap}
         title={`${title}\r\n${desc}`}
         style={{
-          opacity: (() => {
-            if (!currentZoom) {
-              return 1;
-            } else {
-              if (currentZoom < 8) {
-                return 0.7;
-              } else if (currentZoom < 9) {
-                return 0.75;
-              } else if (currentZoom < 12) {
-                return 0.8;
-              } else if (currentZoom < 13) {
-                return 0.85;
-              } else if (currentZoom < 14) {
-                return 0.9;
-              } else {
-                return 1;
-              }
-            }
-          })(),
+          opacity: opacity,
         }}
       >
         <div className={styles.RedMarkerBalloon}>
           <div
             className={`${styles.RedMarkerBalloonTitle} ${styles.RedMarkerBalloonTitleMoreZoom}`}
           >
-            {currentZoom > 13 && photo && photo.length > 0 ? (
+            {currentZoom > 12 && photo && photo.length > 0 ? (
               <img
                 alt={title}
                 style={{
@@ -81,6 +86,7 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
                   width: `${size}px`,
                   objectFit: "cover",
                   cursor: "zoom-in",
+                  opacity: opacity - 0.5,
                 }}
                 src={photo}
                 loading="lazy"
