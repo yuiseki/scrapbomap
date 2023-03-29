@@ -40,6 +40,66 @@ const Post = () => {
   const [sortedData, setSortedData] = useState<
     turf.helpers.Feature[] | undefined
   >(undefined);
+  const [sortOrder, setSortOrder] = useState("location");
+
+  // ソートの実装
+  useEffect(() => {
+    if (!currentCenter) return;
+    if (!geojsondata) return;
+    switch (sortOrder) {
+      case "title": {
+        const sorted = geojsondata.features.sort((poi1, poi2) => {
+          if (!poi1.properties || !poi2.properties) {
+            return 0;
+          }
+          return poi1.properties.title.localeCompare(
+            poi2.properties.title,
+            "ja",
+            { numeric: true }
+          );
+        });
+        setSortedData(sorted);
+        break;
+      }
+      case "datetime": {
+        const sorted = geojsondata.features.sort((poi1, poi2) => {
+          if (!poi1.properties || !poi2.properties) {
+            return 0;
+          }
+          return (
+            new Date(poi1.properties.captured_at).getTime() -
+            new Date(poi2.properties.captured_at).getTime()
+          );
+        });
+        setSortedData(sorted);
+        break;
+      }
+      case "location": {
+        const sorted = geojsondata.features.sort((poi1, poi2) => {
+          if (
+            poi1.geometry.type !== "Point" ||
+            poi2.geometry.type !== "Point"
+          ) {
+            return 0;
+          }
+          // Note order: longitude, latitude.
+          const center = turf.point(currentCenter);
+          const from = turf.point(poi1.geometry.coordinates as number[]);
+          const to = turf.point(poi2.geometry.coordinates as number[]);
+          const centerToFrom = turf.distance(center, from, {
+            units: "degrees",
+          });
+          const centerToTo = turf.distance(center, to, { units: "degrees" });
+          return centerToFrom - centerToTo;
+        });
+        setSortedData(sorted);
+        break;
+      }
+
+      default:
+        break;
+    }
+  }, [currentCenter, geojsondata, sortOrder]);
 
   // 初回のみ地図をデータにあわせる
   useEffect(() => {
@@ -72,24 +132,6 @@ const Post = () => {
       mapRef.current.getCenter().lat,
     ]);
   }, []);
-
-  useEffect(() => {
-    if (!currentCenter) return;
-    if (!geojsondata) return;
-    const sorted = geojsondata.features.sort((poi1, poi2) => {
-      if (poi1.geometry.type !== "Point" || poi2.geometry.type !== "Point") {
-        return 0;
-      }
-      // Note order: longitude, latitude.
-      const center = turf.point(currentCenter);
-      const from = turf.point(poi1.geometry.coordinates as number[]);
-      const to = turf.point(poi2.geometry.coordinates as number[]);
-      const centerToFrom = turf.distance(center, from, { units: "degrees" });
-      const centerToTo = turf.distance(center, to, { units: "degrees" });
-      return centerToFrom - centerToTo;
-    });
-    setSortedData(sorted);
-  }, [currentCenter, geojsondata]);
 
   return (
     <>
