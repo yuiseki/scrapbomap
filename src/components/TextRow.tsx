@@ -31,25 +31,62 @@ export const Title: React.FC<{
     return null;
   }
 
+  const size = 30;
+
   return (
-    <li style={{ marginTop: "5px" }}>
+    <li
+      style={{
+        display: "flex",
+        marginTop: "5px",
+        gap: "5px",
+        lineHeight: `${size}px`,
+        verticalAlign: "middle",
+      }}
+    >
       <a target="_blank" href={poi.properties.url}>
         {poi.properties.url.startsWith("https://scrapbox.io") ? (
           <img
             alt="Go to Scrapbox"
-            width={18}
-            height={18}
+            width={size}
+            height={size}
             src="https://scrapbox.io/assets/img/favicon/favicon.ico"
           />
         ) : (
           <img
             alt="Go to Gyazo"
-            width={18}
-            height={18}
+            width={size}
+            height={size}
             src="https://gyazo.com/favicon.ico"
           />
         )}
       </a>
+      <span> </span>
+      {poi.properties.image && poi.properties.image.length > 0 ? (
+        <img
+          alt={poi.properties.title}
+          style={{
+            height: `${size}px`,
+            width: `${size}px`,
+            objectFit: "cover",
+            cursor: "zoom-in",
+          }}
+          src={poi.properties.image}
+          loading="lazy"
+          onClick={flyTo}
+        />
+      ) : (
+        <span
+          title={poi.properties.title}
+          style={{
+            display: "inline-block",
+            height: `${size}px`,
+            width: `${size}px`,
+            lineHeight: `${size}px`,
+            textAlign: "center",
+            verticalAlign: "middle",
+          }}
+        ></span>
+      )}
       <span> </span>
       <span onClick={flyTo} style={{ fontWeight: "bold", cursor: "zoom-in" }}>
         {poi.properties.title}

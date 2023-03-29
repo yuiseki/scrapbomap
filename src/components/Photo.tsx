@@ -38,7 +38,7 @@ export const Photo: React.FC<{ poi: turf.helpers.Feature }> = ({ poi }) => {
       onClick={flyTo}
       title={`${poi.properties.title}\r\n${poi.properties.descriptions[0]}`}
     >
-      {poi.properties.image ? (
+      {poi.properties.image && poi.properties.image.length > 0 ? (
         <img
           alt={poi.properties.title}
           style={{
