@@ -63,8 +63,18 @@ export default function Home() {
             </Link>
           </li>
           <li>
+            <Link href="/gyazo/13dd158ce0e158452f9752ecc318b707">
+              yuisekiの蕎麦マップ
+            </Link>
+          </li>
+          <li>
             <Link href="/gyazo/5939495c0dd36429de93875b915e729a">
               沖縄県那覇市 2023-03 yuiseki
+            </Link>
+          </li>
+          <li>
+            <Link href="/gyazo/6ac4f1d1c99aaee992aa13046303fa21">
+              韓国ソウル 2020-02 yuiseki
             </Link>
           </li>
           <li>
