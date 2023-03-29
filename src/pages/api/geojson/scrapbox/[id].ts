@@ -71,17 +71,19 @@ export default async function handler(
         const longitude = locationArray[1].replace("E", "");
         const point = turf.point([parseFloat(longitude), parseFloat(latitude)]);
         let image = page.image;
-        if (image.includes(".png")) {
-          image = image.replace(".png", "");
-        }
-        if (image.includes(".jpg")) {
-          image = image.replace(".jpg", "");
-        }
-        if (image.includes(".gif")) {
-          image = image.replace(".gif", "");
-        }
-        if (image.includes(".wepb")) {
-          image = image.replace(".webp", "");
+        if (image) {
+          if (image.includes(".png")) {
+            image = image.replace(".png", "");
+          }
+          if (image.includes(".jpg")) {
+            image = image.replace(".jpg", "");
+          }
+          if (image.includes(".gif")) {
+            image = image.replace(".gif", "");
+          }
+          if (image.includes(".wepb")) {
+            image = image.replace(".webp", "");
+          }
         }
         point.properties = {
           title: page.title,
