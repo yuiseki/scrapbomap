@@ -73,6 +73,11 @@ export default function Home() {
             </Link>
           </li>
           <li>
+            <Link href="/gyazo/5679cc5548023adc67349722596ce2a7">
+              三重県津市 2022-09 yuiseki
+            </Link>
+          </li>
+          <li>
             <Link href="/gyazo/6ac4f1d1c99aaee992aa13046303fa21">
               韓国ソウル 2020-02 yuiseki
             </Link>
