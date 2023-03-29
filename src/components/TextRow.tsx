@@ -90,7 +90,9 @@ export const Title: React.FC<{
       {poi.properties.captured_at && (
         <>
           <span> </span>
-          <span>{poi.properties.captured_at_str}</span>
+          <span onClick={flyTo} style={{ cursor: "zoom-in" }}>
+            {poi.properties.captured_at_str}
+          </span>
         </>
       )}
       <>
