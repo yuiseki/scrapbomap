@@ -31,7 +31,7 @@ export const Title: React.FC<{
     return null;
   }
 
-  const size = 30;
+  const size = 40;
 
   return (
     <li
