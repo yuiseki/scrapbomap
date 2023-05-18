@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import {
+  GeolocateControl,
   Map,
   MapProvider,
   MapRef,
@@ -241,7 +242,7 @@ const Post = () => {
                 longitude: 139.784,
                 zoom: 11,
               }}
-              hash={false}
+              hash={true}
               maxZoom={22}
               maxPitch={85}
               onLoad={onLoad}
@@ -272,6 +273,7 @@ const Post = () => {
                 showZoom={true}
                 showCompass={true}
               />
+              <GeolocateControl position="bottom-right" />
             </Map>
             <div style={{ flexGrow: 0 }}>
               <div

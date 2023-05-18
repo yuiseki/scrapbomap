@@ -78,7 +78,7 @@ export const RedMarker: React.FC<RedMarkerProps> = ({
           <div
             className={`${styles.RedMarkerBalloonTitle} ${styles.RedMarkerBalloonTitleMoreZoom}`}
           >
-            {currentZoom > 12 && photo && photo.length > 0 ? (
+            {6 < currentZoom && photo && photo.length > 0 ? (
               <img
                 alt={title}
                 style={{
