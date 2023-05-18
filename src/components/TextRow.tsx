@@ -97,9 +97,19 @@ export const Title: React.FC<{
       )}
       <>
         <span> </span>
-        <span onClick={flyTo} style={{ fontWeight: "bold", cursor: "zoom-in" }}>
-          {poi.properties.title}
-        </span>
+        {poi.properties.title.startsWith("#") ||
+        poi.properties.title === "Gyazo Android" ? (
+          <span onClick={flyTo} style={{ cursor: "zoom-in" }}>
+            {poi.properties.title}
+          </span>
+        ) : (
+          <span
+            onClick={flyTo}
+            style={{ fontWeight: "bold", cursor: "zoom-in" }}
+          >
+            {poi.properties.title}
+          </span>
+        )}
       </>
       {poi.properties.descriptions && poi.properties.descriptions.length > 0 && (
         <>
