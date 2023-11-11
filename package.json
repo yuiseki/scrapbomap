@@ -11,8 +11,8 @@
   "dependencies": {
     "@turf/turf": "^6.5.0",
     "@types/node": "20.8.9",
-    "@types/react": "18.2.31",
-    "@types/react-dom": "18.2.14",
+    "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.2",
     "mapbox-gl": "npm:empty-npm-package@^1.0.0",
